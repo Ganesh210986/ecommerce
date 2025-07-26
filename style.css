@@ -68,8 +68,9 @@
     display: flex;
     flex-direction: column;
     width: 8vw;
-    justify-content: center;
+    justify-content: flex-end;
     align-items: center;
+    /* gap: 5px; */
 }
 .icons img{
     width: 27px;  
@@ -81,11 +82,10 @@
 .cart{
     display: flex;
     flex-direction: column;
-    width: 8vw;
-    justify-content: flex-end;
+    width: 5.5vw;
+    justify-content: center;
     align-items: center;
-    height: 60px;
-    /* position: relative; */
+    height: 47px;
 }
 #cart-value{
     position: absolute;
@@ -101,6 +101,7 @@
 }
 .bg{
     width: 100vw;
+    height: 85vw;
 }
 .product-list{
     display: grid;

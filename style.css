@@ -4,10 +4,7 @@
     padding: 0;
     box-sizing: border-box;
     font-family: Poppins,outfit;
-
-}
-body{
-        overflow-x: hidden;
+    overflow-x: hidden;
 }
 .nav-bar{
     display: flex;
@@ -19,6 +16,7 @@ body{
     position: fixed;
     width: 100%;
     top: 0;
+    z-index: 99;
 }
 .logo{
     display: flex;
@@ -53,36 +51,61 @@ body{
     display: flex;
     gap: 20px;
     align-items: center;
+    width: 20vw;
+    justify-content: center;
+}
+.cart div{
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: center;
+    cursor: pointer;
+    height: 100%;
+
 }
 .wishlist{
     display: flex;
     flex-direction: column;
+    width: 8vw;
+    justify-content: center;
+    align-items: center;
 }
 .icons img{
-    width: 30px;  
+    width: 27px;  
+}
+.icons p{
+    font-size: small;
+    text-align: center;
 }
 .cart{
     display: flex;
     flex-direction: column;
-    position: relative;
+    width: 8vw;
+    justify-content: flex-end;
+    align-items: center;
+    height: 60px;
+    /* position: relative; */
 }
-.cart span{
+#cart-value{
     position: absolute;
-    /* top: 14px; */
     background-color: red;
     border-radius: 50%;
     color: white;
     font-size: small;
     width: 15px;
     text-align: center;
+    top: 0;
+    z-index: 1;
+    right: 0;
 }
 .bg{
     width: 100vw;
 }
 .product-list{
     display: grid;
-    grid-template-columns: 30vw 30vw 30vw;
-    gap: 25px;
+    grid-template-columns: 27vw 27vw 27vw;
+    gap: 30px;
     justify-content: center;
 }
 .filters{
@@ -106,15 +129,15 @@ body{
     font-size: smaller;
 }
 .product img{
-    width: 240px;
-    height: 200px;
+    width: 100%;
+    height: 300px;
 }
 .product button{
     padding: 10px;
     background-color: gray;
     color: white;
     border-radius: 5px;
-    width: 300px;
+    width: 100%;
 }
 .items-images{
     display: flex;
@@ -133,12 +156,13 @@ body{
     position: absolute;
     top: 0;
     right: 0;
-    width: 450px;
-    height: 100vh;
+    width: 40vw;
+    height: 100%;
     background-color: beige;
     color:  black;
     gap: 20px;
     align-items: center;
+    z-index: 1000;
 }
 .align{
     display: flex;
@@ -208,4 +232,126 @@ body{
     display: flex;
     gap: 25px;
     align-items: center;
+}
+.items-images{
+    position: relative;
+    width: 100%;
+}
+.wish{
+position: absolute;
+right: 3px;
+top: 0;
+}
+.footer {
+    width: 100%;
+    background-color: #403d3d;
+    color: #fff;
+    padding: 20px 0;
+    text-align: center;
+    margin-top: 40px;
+}
+.footer-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+.footer-links {
+    display: flex;
+    gap: 20px;
+}
+.footer-links a {
+    color: #ffd700;
+    text-decoration: none;
+    font-size: 0.95rem;
+}
+.footer-links a:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+    .footer-content {
+        font-size: 0.9rem;
+    }
+    .footer-links {
+        flex-direction: column;
+        gap: 8px;
+    }
+}
+
+@media(max-width: 768px) {
+    .product-list{
+        grid-template-columns: 45vw 45vw;
+    }
+    .cart-sidebar{
+        width: 100%;
+    }
+    .align{
+        display: flex;
+        gap: 30px;
+    }
+    .sub-align{
+        display: flex;
+        align-items: flex-start;
+        gap: 40px;
+    }
+    .added-items{
+        display: flex;
+        align-items: flex-start;
+        gap: 20px;
+    }
+    .cart-item{
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+    }
+    .added-items p{
+        font-size: xx-small;
+    }
+    .search{
+        width: 20vw;
+    }
+    .search-input{
+        width: 100%;
+    }
+    .search img{
+       display: none;
+    }
+    .icons p{
+        display: none;
+    }
+    .logo img{
+        width: 30px;
+    }
+    .logo p{
+        font-size: medium;
+    }
+   
+}
+@media(max-width: 500px) {
+    .product-list{
+        grid-template-columns: 100%;
+    }
+    .cart-sidebar{
+        width: 100%;
+    }
+    .align{
+        display: flex;
+        align-items: center;
+        gap: 155px;
+    }
+    .sub-align{
+        display: flex;
+        align-items: center;
+        gap: 30px;
+    }
+    .added-items{
+        display: flex;
+        align-items: center;
+        gap: 20px;
+    }
+    .cart-item{
+        display: flex;
+        align-items: center;
+    }
 }

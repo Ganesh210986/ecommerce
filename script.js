@@ -3,6 +3,7 @@ import data from './data.js';
 const categorySelect = document.getElementById("categorySelect");
 const searchInput = document.querySelector("#search-input");
 const productsContainer = document.getElementById("products");
+const cartValue = document.getElementById("cart-value");
 
 function displayProducts(products) {
   productsContainer.innerHTML = "";
@@ -45,7 +46,24 @@ displayProducts(data);
 categorySelect.addEventListener("change", filterAndDisplay);
 searchInput.addEventListener("input", filterAndDisplay);
 
-const cart=[]
+let cart=[]
+function updateCartValue() {
+  const total = cart.reduce((sum, item) => sum + item.quantity, 0);
+  cartValue.textContent = total;
+}
+const cartData = localStorage.getItem("cart");
+if (cartData) {
+  cart= JSON.parse(cartData);
+  updateCartValue();
+  displayCart();
+}
+else {
+  cart = [];
+  updateCartValue();
+  displayCart();
+
+}
+
 function addToCart(data){
   const existingItems= cart.find(item=>item.id===data.id);
   if(existingItems){
@@ -53,8 +71,8 @@ function addToCart(data){
   }else{
     cart.push({...data,quantity:1})
   }
-  const cartValue = document.getElementById("cart-value");
-  cartValue.textContent =parseInt(cartValue.textContent) + 1;
+  localStorage.setItem("cart", JSON.stringify(cart));
+  updateCartValue();
 displayCart();
 }
 function displayCart(){
@@ -71,7 +89,11 @@ function displayCart(){
     <button class="remove" data-id="${item.id}">Remove</button>
 
   </div>
-  `)
+  `).join("");
+  const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+  const totalPriceElement = document.createElement("p");
+  totalPriceElement.textContent = `Total Price: Rs ${totalPrice}`;
+  cartitems.appendChild(totalPriceElement);
   document.querySelectorAll(".remove").forEach(button => {
     button.addEventListener("click", () => {
       const itemId = parseInt(button.getAttribute("data-id"));
@@ -79,11 +101,19 @@ function displayCart(){
     });
   });
 }
+
+
 function removeFromCart(itemId) {
   const itemIndex = cart.findIndex(item => item.id === itemId);
-  if (itemIndex > -1) {
-    cart.splice(itemIndex, 1);
-    displayCart();
+  if(itemIndex >=0){
+    cart[itemIndex].quantity -= 1;
+    if(cart[itemIndex].quantity === 0) {
+      cart.splice(itemIndex, 1);
+    }
+  
+  localStorage.setItem("cart", JSON.stringify(cart));
+  updateCartValue();
+  displayCart();
   }
 }
 document.querySelector("#cart-image").addEventListener("click", () => {
@@ -93,4 +123,19 @@ document.querySelector("#cart-image").addEventListener("click", () => {
 document.querySelector(".close").addEventListener("click", () => {
   const cartSidebar = document.querySelector(".cart-sidebar");
   cartSidebar.style.display = "none";
+});
+
+
+document.querySelector(".checkout").addEventListener("click", () => {
+  if (cart.length === 0) {
+    alert("Your cart is empty!");
+    return;
+  }else{
+    cart = [];
+    localStorage.setItem("cart", JSON.stringify(cart));
+    updateCartValue();
+    displayCart();
+    alert("Thank you for your purchase!");
+  }
+  
 });
